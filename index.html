@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DΞITH // Official Terminal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-deep: #0a0b0d;
+            --card-glass: rgba(20, 22, 28, 0.75);
+            --text-main: #ffffff;
+            --text-muted: #a0a5b5;
+            
+            /* Theme Color Palette */
+            --pfp-yellow: #ffea00;
+            --pfp-yellow-glow: rgba(255, 234, 0, 0.25);
+            --pfp-white: #ffffff;
+            --neon-pink: #ff007f;
+            --neon-cyan: #00f0ff;
+            
+            /* Interactive Brand Colors */
+            --brand-discord: #5865F2;
+            --brand-instagram: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7);
+            --brand-tiktok: #000000;
+            --brand-email: #ffea00;
+            
+            /* UI 3D Gloss Elements */
+            --game-ui-cash-top: #00ff55;
+            --game-ui-cash-bot: #005a19;
+            --game-ui-pay-top: #00bfff;
+            --game-ui-pay-bot: #003399;
+            
+            --font-display: 'Share Tech Mono', monospace;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* AMBIENT BACKGROUND MATRIX */
+        .ambient-matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .aura-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.12;
+            mix-blend-mode: screen;
+        }
+
+        .orb-1 {
+            top: -10%;
+            left: 15%;
+            width: 45vw;
+            height: 45vw;
+            background: radial-gradient(circle, var(--pfp-yellow) 0%, transparent 70%);
+        }
+
+        .orb-2 {
+            bottom: -5%;
+            right: 10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, var(--neon-pink) 0%, transparent 70%);
+        }
+
+        .ambient-matrix::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 234, 0, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 234, 0, 0.01) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+        }
+
+        /* BENTO CONTAINER GRID SETUP */
+        .bento-container {
+            max-width: 800px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            z-index: 2;
+        }
+
+        /* MAIN HERO DASHBOARD MODULE */
+        .hero-dashboard {
+            background: var(--card-glass);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 3px solid var(--pfp-yellow);
+            border-radius: 32px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .pfp-container {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 3px solid var(--pfp-yellow);
+            overflow: hidden;
+            margin-bottom: 18px;
+            box-shadow: 0 0 25px var(--pfp-yellow-glow);
+            background: #14161c;
+        }
+
+        .pfp-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-handle {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: var(--pfp-white);
+            text-shadow: 2px 2px 0px var(--pfp-yellow);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .role-tag {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            color: var(--pfp-yellow);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 28px;
+        }
+
+        /* STATISTICS METRIC DISPLAY STRIP */
+        .metrics-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 20px 10px;
+            gap: 10px;
+        }
+
+        .metric-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--pfp-white);
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        /* SECTION CARD BASE CONTAINER */
+        .section-card {
+            background: var(--card-glass);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 28px;
+            padding: 32px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .section-card.promo-card {
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.1);
+        }
+
+        .section-card.cyan-card {
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+        }
+
+        .section-card-header {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--pfp-yellow);
+            margin-bottom: 20px;
+            border-left: 3px solid var(--pfp-yellow);
+            padding-left: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-card-header.promo-header {
+            color: var(--neon-pink);
+            border-left-color: var(--neon-pink);
+        }
+
+        .section-card-header.cyan-header {
+            color: var(--neon-cyan);
+            border-left-color: var(--neon-cyan);
+        }
+
+        .section-subheader {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        /* INTERACTIVE PURCHASE CARDS */
+        .promo-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .promo-block:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .promo-block-tag {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--neon-pink);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .promo-block-tag.cyan-tag {
+            color: var(--neon-cyan);
+        }
+
+        .promo-price-layout {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .promo-amount {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .promo-scale {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* CUSTOM PRODUCTION DESIGN PLUGINS */
+        .design-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .design-item:hover {
+            border-color: rgba(255, 234, 0, 0.4);
+            background: rgba(255, 234, 0, 0.02);
+            transform: scale(1.01);
+        }
+
+        .design-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .design-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
+
+        .design-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 8px 16px;
+            border-radius: 12px;
+        }
+
+        .price-badge {
+            background: var(--pfp-yellow);
+            color: #000000;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(255, 234, 0, 0.2);
+        }
+
+        /* RE-ENGINEERED BRAND HIGH-COLOR INTERFACE BUTTONS */
+        .interactive-node {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-family: var(--font-sans);
+            color: #ffffff;
+            transition: all 0.3s cubic-bezier(0.2, 1, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .node-icon-wrapper {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+        }
+
+        .node-icon-wrapper svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .node-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .node-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.7;
+            color: #ffffff;
+        }
+
+        .node-value {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        /* BRAND SPECIFIC STATE RIGGING */
+        .node-discord {
+            background: rgba(88, 101, 242, 0.15);
+            border-color: rgba(88, 101, 242, 0.3);
+        }
+        .node-discord:hover {
+            background: var(--brand-discord);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .node-email {
+            background: rgba(255, 234, 0, 0.08);
+            border-color: rgba(255, 234, 0, 0.2);
+        }
+        .node-email:hover {
+            background: var(--brand-email);
+            color: #000000;
+            box-shadow: 0 8px 25px rgba(255, 234, 0, 0.3);
+            transform: translateY(-3px);
+        }
+        .node-email:hover .node-label { color: #000000; opacity: 0.8; }
+        .node-email:hover .node-value { color: #000000; }
+
+        .node-instagram {
+            background: rgba(238, 42, 123, 0.12);
+            border-color: rgba(238, 42, 123, 0.25);
+        }
+        .node-instagram:hover {
+            background: var(--brand-instagram);
+            box-shadow: 0 8px 25px rgba(238, 42, 123, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .node-tiktok {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .node-tiktok:hover {
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+        .node-tiktok:hover .node-label { color: #000000; opacity: 0.7; }
+        .node-tiktok:hover .node-value { color: #000000; }
+
+        /* MODAL OVERLAY WRAPPER */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 8, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            display: flex;
+            align-items: flex-end;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* 50/50 SPLIT SLIDING DRAWER UI */
+        .modal-drawer {
+            width: 100%;
+            background: #0e1014;
+            border-top: 3px solid var(--pfp-yellow);
+            border-radius: 32px 32px 0 0;
+            padding: 40px;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(0.1, 1, 0.1, 1);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-drawer {
+            transform: translateY(0);
+        }
+
+        .modal-container-split {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+        }
+
+        .modal-close-trigger {
+            position: absolute;
+            top: -20px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            padding: 8px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .modal-close-trigger:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .modal-product-side {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modal-product-tag {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--pfp-yellow);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .modal-product-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .modal-product-price {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: #ffffff;
+            font-weight: 800;
+            margin-top: 10px;
+        }
+
+        /* ARCADE 3D DECK SELECTION BUTTONS */
+        .payment-deck-side {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .payment-node {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            text-align: center;
+            border-radius: 20px;
+            text-decoration: none;
+            box-shadow: 
+                inset 0 4px 0 rgba(255, 255, 255, 0.25),
+                inset 0 -4px 0 rgba(0, 0, 0, 0.3),
+                0 8px 16px rgba(0,0,0,0.4);
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .payment-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(rgba(255,255,255,0.12), transparent);
+            border-radius: 18px 18px 0 0;
+            pointer-events: none;
+        }
+
+        .pay-cashapp {
+            background: linear-gradient(180deg, var(--game-ui-cash-top) 0%, var(--game-ui-cash-bot) 100%);
+            border: 2px solid #2eff71;
+        }
+
+        .pay-paypal {
+            background: linear-gradient(180deg, var(--game-ui-pay-top) 0%, var(--game-ui-pay-bot) 100%);
+            border: 2px solid #33ccff;
+        }
+
+        .pay-cashapp:hover, .pay-paypal:hover {
+            filter: brightness(1.15) contrast(1.02);
+            transform: translateY(-3px);
+            box-shadow: 
+                inset 0 4px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -4px 0 rgba(0, 0, 0, 0.3),
+                0 12px 24px rgba(0,0,0,0.5);
+        }
+
+        .pay-text-main {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .pay-text-sub {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            color: #ffffff;
+            margin-top: 2px;
+        }
+
+        /* BIO BACKGROUND TERMINAL FOOTER */
+        .business-footer {
+            margin-top: 10px;
+            padding: 40px;
+            background: rgba(14, 16, 20, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 28px;
+            text-align: center;
+        }
+
+        .bio-title {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--pfp-yellow);
+            margin-bottom: 14px;
+        }
+
+        .bio-professional-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 650px;
+            margin: 0 auto 24px auto;
+        }
+
+        .meta-badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(255, 254, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--pfp-white);
+            padding: 8px 16px;
+            border-radius: 10px;
+        }
+
+        /* MEDIA LAYOUT RESPONSIVENESS */
+        @media (max-width: 768px) {
+            .modal-container-split { grid-template-columns: 1fr; gap: 30px; }
+            .modal-close-trigger { top: -30px; }
+            .modal-product-title { font-size: 1.8rem; }
+            .modal-product-price { font-size: 2.4rem; }
+        }
+
+        @media (max-width: 640px) {
+            .grid-layout { grid-template-columns: 1fr; }
+            .hero-dashboard { padding: 30px 20px; }
+            .user-handle { font-size: 2.4rem; }
+            .metric-value { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCREEN SPACE LIGHTING LAYERS -->
+    <div class="ambient-matrix">
+        <div class="aura-orb orb-1"></div>
+        <div class="aura-orb orb-2"></div>
+    </div>
+
+    <div class="bento-container">
+        
+        <!-- MODULE 1: MAIN IDENTIFIER & TRAFFIC METRICS -->
+        <div class="hero-dashboard">
+            <div class="pfp-container">
+                <img src="file:///C:/Users/Mart/Downloads/profile.jpg" alt="Kyrie Irving Edit Profile Asset">
+            </div>
+            <h1 class="user-handle">D.E.I.TH</h1>
+            <div class="role-tag">Digital Asset Editor & Director</div>
+            
+            <div class="metrics-strip">
+                <div class="metric-box">
+                    <span class="metric-value">40K</span>
+                    <span class="metric-label">Followers</span>
+                </div>
+                <div class="metric-box">
+                    <span class="metric-value">4M</span>
+                    <span class="metric-label">Likes</span>
+                </div>
+                <div class="metric-box">
+                    <span class="metric-value">70M+</span>
+                    <span class="metric-label">Views</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 2: EDUCATIONAL PORTAL & ACADEMY CLASSES -->
+        <div class="section-card cyan-card">
+            <div class="section-card-header cyan-header">
+                <span>ACADEMY // MASTERCLASSES OFFERED</span>
+                <span style="font-size: 0.8rem; letter-spacing: 1px; opacity: 0.8;">ENROLLMENT OPEN</span>
+            </div>
+            <div class="section-subheader">Gain expert strategic insights. Learn technical editing foundations or industrial logistics economics directly from live interactive curriculum models.</div>
+            <div class="grid-layout">
+                <div class="promo-block" data-title="Advanced Editing Masterclass" data-tag="Academy Class" data-price="$50">
+                    <div>
+                        <div class="promo-block-tag cyan-tag">Advanced Editing</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px;">Mastering pacing metrics, asset coordination, high-retention velocity shifts, and CC sharpener setups.</p>
+                    </div>
+                    <div class="promo-price-layout">
+                        <span class="promo-amount">$50</span>
+                        <span class="promo-scale">/ Session</span>
+                    </div>
+                </div>
+                <div class="promo-block" data-title="Scrap & Recycling Economics" data-tag="Academy Class" data-price="$45">
+                    <div>
+                        <div class="promo-block-tag cyan-tag">Scrap & Recycling Economics</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px;">An inside look into processing models, bulk market valuations, commodity distribution, and yard operational logistics.</p>
+                    </div>
+                    <div class="promo-price-layout">
+                        <span class="promo-amount">$45</span>
+                        <span class="promo-scale">/ Session</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 3: SOUND PROMOTION TERMINAL -->
+        <div class="section-card promo-card">
+            <div class="section-card-header promo-header">
+                <span>LABELS & ARTISTS // DISTRIBUTION</span>
+                <span style="font-size: 0.8rem; letter-spacing: 1px; opacity: 0.8;">PROMO ACTIVE</span>
+            </div>
+            <div class="section-subheader">SOUND PROMOTION TERMINAL: Inject your audio tracks directly into high-retention athletic media feeds.</div>
+            <div class="grid-layout">
+                <div class="promo-block" data-title="Single Video Placement" data-tag="Audio Promotion" data-price="$80">
+                    <div class="promo-block-tag">Single Slot</div>
+                    <div class="promo-price-layout">
+                        <span class="promo-amount">$80</span>
+                        <span class="promo-scale">/ Video</span>
+                    </div>
+                </div>
+                <div class="promo-block" data-title="3-Video Bundle Campaign" data-tag="Audio Promotion" data-price="$180">
+                    <div class="promo-block-tag">3-Video Bundle</div>
+                    <div class="promo-price-layout">
+                        <span class="promo-amount">$60</span>
+                        <span class="promo-scale">/ Per Video</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 4: PRODUCTION & DESIGN BOARD -->
+        <div class="section-card">
+            <div class="section-card-header">/ Asset Pricing Matrix</div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                
+                <div class="design-item" data-title="Monographs Asset Pack" data-tag="Design Asset" data-price="$100">
+                    <div class="design-meta">
+                        <span class="design-title">Monographs</span>
+                        <div class="design-action-btn">
+                            <svg style="width:14px; height:14px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0-7C7 2 2.73 5.61 1 10c1.73 4.39 6 8 11 8s9.27-3.61 11-8c-1.73-4.39-6-8-11-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+                            Design Link
+                        </div>
+                    </div>
+                    <div class="price-badge">$100</div>
+                </div>
+
+                <div class="design-item" data-title="Phonk Cuts Premium Edit" data-tag="Design Asset" data-price="$80">
+                    <div class="design-meta">
+                        <span class="design-title">Phonk Cuts</span>
+                        <div class="design-action-btn">
+                            <svg style="width:14px; height:14px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0-7C7 2 2.73 5.61 1 10c1.73 4.39 6 8 11 8s9.27-3.61 11-8c-1.73-4.39-6-8-11-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+                            Design Link
+                        </div>
+                    </div>
+                    <div class="price-badge">$80</div>
+                </div>
+
+                <div class="design-item" data-title="3D Layout System Architecture" data-tag="Design Asset" data-price="$150">
+                    <div class="design-meta">
+                        <span class="design-title">3D Layout System</span>
+                        <div class="design-action-btn">
+                            <svg style="width:14px; height:14px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0-7C7 2 2.73 5.61 1 10c1.73 4.39 6 8 11 8s9.27-3.61 11-8c-1.73-4.39-6-8-11-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+                            Design Link
+                        </div>
+                    </div>
+                    <div class="price-badge">$150</div>
+                </div>
+
+                <div class="design-item" data-title="Mixtape Full Run Package" data-tag="Design Asset" data-price="$60">
+                    <div class="design-meta">
+                        <span class="design-title">Mixtape Run</span>
+                        <div class="design-action-btn">
+                            <svg style="width:14px; height:14px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0-7C7 2 2.73 5.61 1 10c1.73 4.39 6 8 11 8s9.27-3.61 11-8c-1.73-4.39-6-8-11-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+                            Design Link
+                        </div>
+                    </div>
+                    <div class="price-badge">$60</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MODULE 5: CONTACT PIPELINES -->
+        <div class="section-card">
+            <div class="section-card-header">/ Contact Channels</div>
+            <div class="grid-layout">
+                <a href="https://discord.com/users/mart5440" target="_blank" class="interactive-node node-discord">
+                    <div class="node-icon-wrapper">
+                        <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.73-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.65-2.1a75.22,75.22,0,0,0,72.76,0c.84.73,1.74,1.43,2.65,2.1a68.86,68.86,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.73,10.93,105.54,105.54,0,0,0,31.05-18.83C129.56,50.7,123.46,27.82,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.93,46,53.84,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.17,46,96.08,53,91,65.69,84.69,65.69Z"/></svg>
+                    </div>
+                    <div class="node-content">
+                        <span class="node-label">Discord</span>
+                        <span class="node-value">mart5440</span>
+                    </div>
+                </a>
+                <a href="mailto:deithdidit@gmail.com" class="interactive-node node-email">
+                    <div class="node-icon-wrapper">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </div>
+                    <div class="node-content">
+                        <span class="node-label">Business Mail</span>
+                        <span class="node-value">deithdidit@gmail.com</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- MODULE 6: SOCIAL PIPELINES -->
+        <div class="section-card">
+            <div class="section-card-header">/ Social Pipelines</div>
+            <div class="grid-layout">
+                <a href="https://www.instagram.com/d.e.i.t.h" target="_blank" class="interactive-node node-instagram">
+                    <div class="node-icon-wrapper">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                    </div>
+                    <div class="node-content">
+                        <span class="node-label">Instagram</span>
+                        <span class="node-value">@d.e.i.t.h</span>
+                    </div>
+                </a>
+                <a href="https://www.tiktok.com/@d.e.i.t.h" target="_blank" class="interactive-node node-tiktok">
+                    <div class="node-icon-wrapper">
+                        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.06-2.89-.52-4.06-1.39-.64-.47-1.17-1.09-1.57-1.8-.06 2.45-.04 4.9-.06 7.35-.11 2.38-.85 4.79-2.58 6.49-1.89 1.89-4.73 2.52-7.35 1.94-2.73-.55-5.11-2.59-5.91-5.26-.88-2.92.16-6.28 2.54-8.02 1.88-1.41 4.35-1.92 6.67-1.35v4.01c-1.25-.43-2.69-.17-3.72.67-.97.77-1.39 2.08-1.12 3.29.21 1.07.99 1.99 2 2.37 1.25.48 2.72.15 3.62-.83.67-.71.97-1.68.94-2.65-.03-3.77-.02-7.54-.02-11.31z"/></svg>
+                    </div>
+                    <div class="node-content">
+                        <span class="node-label">TikTok</span>
+                        <span class="node-value">@d.e.i.t.h</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- MODULE 7: BACK-UP ROUTING NODES -->
+        <div class="section-card">
+            <div class="section-card-header">/ Standalone Payment Gateways</div>
+            <div class="grid-layout">
+                <a href="https://cash.app/$martlocked6" target="_blank" class="payment-node pay-cashapp">
+                    <span class="pay-text-main">Cash App</span>
+                    <span class="pay-text-sub">$martlocked6</span>
+                </a>
+                <a href="https://paypal.me/deithdidit" target="_blank" class="payment-node pay-paypal">
+                    <span class="pay-text-main">PayPal Terminal</span>
+                    <span class="pay-text-sub">@deithdidit</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- MODULE 8: SYSTEM PROFILE TERMINAL -->
+        <div class="business-footer">
+            <div class="bio-title">Professional Background</div>
+            <p class="bio-professional-text">
+                Digital content creator and multimedia technical editor specializing in high-velocity pacing metrics, visual brand asset coordination, and audience retention modeling. Actively developing production frameworks while managing high-growth creative accounts.
+            </p>
+            <div class="meta-badge-container">
+                <span class="meta-badge">📍 Rhode Island</span>
+                <span class="meta-badge">🎓 URI Student</span>
+                <span class="meta-badge">⚡ CapCut Director</span>
+                <span class="meta-badge">📊 Media Logistics</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DYNAMIC 50/50 payment SLIDING DRAWER MODAL OVERLAY -->
+    <div class="modal-overlay" id="paymentModalOverlay">
+        <div class="modal-drawer">
+            <div class="modal-container-split">
+                <button class="modal-close-trigger" id="closeModalBtn">Close Terminal</button>
+                
+                <!-- LEFT SIDE: ACTIVE SELECTION METRIC -->
+                <div class="modal-product-side">
+                    <div class="modal-product-tag" id="modalProductTag">Asset Model</div>
+                    <h2 class="modal-product-title" id="modalProductTitle">Selected Product</h2>
+                    <div class="modal-product-price" id="modalProductPrice">$00</div>
+                </div>
+                
+                <!-- RIGHT SIDE: 3D ACTION ACCELERATOR DECKS -->
+                <div class="payment-deck-side">
+                    <a href="https://cash.app/$martlocked6" target="_blank" class="payment-node pay-cashapp">
+                        <span class="pay-text-main">Pay via Cash App</span>
+                        <span class="pay-text-sub">$martlocked6</span>
+                    </a>
+                    <a href="https://paypal.me/deithdidit" target="_blank" class="payment-node pay-paypal">
+                        <span class="pay-text-main">Pay via PayPal</span>
+                        <span class="pay-text-sub">@deithdidit</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT SYSTEM ENGINE -->
+    <script>
+        const modalOverlay = document.getElementById('paymentModalOverlay');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalTag = document.getElementById('modalProductTag');
+        const modalTitle = document.getElementById('modalProductTitle');
+        const modalPrice = document.getElementById('modalProductPrice');
+
+        // Capture clicks on items to open modal drawer dynamically
+        const interactiveElements = document.querySelectorAll('.promo-block, .design-item');
+        
+        interactiveElements.forEach(element => {
+            element.addEventListener('click', () => {
+                const title = element.getAttribute('data-title') || 'Custom Asset order';
+                const tag = element.getAttribute('data-tag') || 'Order Item';
+                const price = element.getAttribute('data-price') || 'Contact';
+
+                modalTitle.textContent = title;
+                modalTag.textContent = tag;
+                modalPrice.textContent = price;
+
+                modalOverlay.classList.add('active');
+            });
+        });
+
+        // Close logic actions
+        closeModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.remove('remove');
+            modalOverlay.classList.remove('active');
+        });
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
