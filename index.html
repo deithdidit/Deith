@@ -13,32 +13,35 @@
     /* 1. Global Radiant Ambient Pulse Animation */
 /* Refined, Low-Opacity Breathing Aura Animation */
  /* 1. Refined Satin-Yellow Radiation Pulse */
+   /* Optimized Satin-Yellow Radiation Pulse with Hardware Acceleration */
     @keyframes radiation-pulse {
         0% {
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.1), inset 0 0 5px rgba(255, 215, 0, 0.05);
-            border-color: #ffd70066 !important; /* Muted Gold */
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.15);
+            border-color: rgba(255, 215, 0, 0.4) !important;
         }
         50% {
-            box-shadow: 0 0 20px rgba(255, 255, 0, 0.25), inset 0 0 10px rgba(255, 255, 0, 0.1);
-            border-color: #ffff00cc !important; /* Electric Yellow */
+            box-shadow: 0 0 16px rgba(255, 255, 0, 0.3);
+            border-color: rgba(255, 255, 0, 0.7) !important;
         }
         100% {
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.1), inset 0 0 5px rgba(255, 215, 0, 0.05);
-            border-color: #ffd70066 !important;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.15);
+            border-color: rgba(255, 215, 0, 0.4) !important;
         }
     }
 
-    /* 2. Global Border Hijack: This turns ALL pink/blue outlines into Yellow */
+    /* Target ONLY specific card elements instead of checking every single div */
     .section-card, 
     .promo-card,
-    .design-item,
-    div[style*="border"], 
-    button[style*="border"] {
-        animation: radiation-pulse 6s ease-in-out infinite !important;
-        transition: all 0.6s ease;
-        border-width: 1.5px !important;
+    .custom-video-matrix > div {
+        animation: radiation-pulse 6s ease-in-out infinite;
+        transition: border-color 0.5s ease, box-shadow 0.5s ease;
+        will-change: box-shadow, border-color; /* Tells browser to use the GPU */
     }
 
+    /* Keeps your payment terminal rendering smooth without constant calculations */
+    .cashapp-glow, .paypal-glow {
+        will-change: box-shadow;
+    }
     /* Target specific cyan/pink headers to match */
     .cyan-header, .pink-theme-override, [style*="rgb(0, 212, 255)"], [style*="rgb(255, 0, 128)"] {
         color: #ffaa00 !important; /* Deep Amber for text readability */
@@ -1064,7 +1067,7 @@ function toggleRowPreview(panelId) {
 
         <!-- MODULE 7: BACK-UP ROUTING NODES -->
         <div class="section-card">
-            <div class="section-card-header">Payment Options</div>
+           <div id="checkout" class="section-card-header">Payment Options</div>
            <!-- === INTERACTIVE HIGH-RADIATION PAYMENT BLOCKS === -->
 <div style="display: flex; gap: 16px; width: 100%; margin-top: 15px; flex-wrap: wrap;">
 
