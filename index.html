@@ -12,19 +12,42 @@
 <style>
     /* 1. Global Radiant Ambient Pulse Animation */
 /* Refined, Low-Opacity Breathing Aura Animation */
+ /* 1. Refined Satin-Yellow Radiation Pulse */
     @keyframes radiation-pulse {
         0% {
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.15), inset 0 0 4px rgba(255, 215, 0, 0.05);
-            border-color: rgba(255, 215, 0, 0.4) !important;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.1), inset 0 0 5px rgba(255, 215, 0, 0.05);
+            border-color: #ffd70066 !important; /* Muted Gold */
         }
         50% {
-            box-shadow: 0 0 16px rgba(255, 255, 0, 0.35), inset 0 0 8px rgba(255, 255, 0, 0.1);
-            border-color: rgba(255, 255, 0, 0.8) !important;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.25), inset 0 0 10px rgba(255, 255, 0, 0.1);
+            border-color: #ffff00cc !important; /* Electric Yellow */
         }
         100% {
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.15), inset 0 0 4px rgba(255, 215, 0, 0.05);
-            border-color: rgba(255, 215, 0, 0.4) !important;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.1), inset 0 0 5px rgba(255, 215, 0, 0.05);
+            border-color: #ffd70066 !important;
         }
+    }
+
+    /* 2. Global Border Hijack: This turns ALL pink/blue outlines into Yellow */
+    .section-card, 
+    .promo-card,
+    .design-item,
+    div[style*="border"], 
+    button[style*="border"] {
+        animation: radiation-pulse 6s ease-in-out infinite !important;
+        transition: all 0.6s ease;
+        border-width: 1.5px !important;
+    }
+
+    /* Target specific cyan/pink headers to match */
+    .cyan-header, .pink-theme-override, [style*="rgb(0, 212, 255)"], [style*="rgb(255, 0, 128)"] {
+        color: #ffaa00 !important; /* Deep Amber for text readability */
+        border-color: #ffd700 !important;
+    }
+
+    /* Update Section Dividers to a subtle Gold line */
+    .section-card-header::before {
+        background: #ffaa00 !important;
     }
 
     /* Apply the smooth animation across all containers */
