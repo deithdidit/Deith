@@ -9,95 +9,82 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
     <!-- === UNIFIED CYBER YELLOW RADIATION GLOW SYSTEM === -->
-<style>
-    /* 1. Global Radiant Ambient Pulse Animation */
-/* Refined, Low-Opacity Breathing Aura Animation */
- /* 1. Refined Satin-Yellow Radiation Pulse */
-   /* Optimized Satin-Yellow Radiation Pulse with Hardware Acceleration */
-    @keyframes radiation-pulse {
-        0% {
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.15);
-            border-color: rgba(255, 215, 0, 0.4) !important;
+    <style>
+        /* Optimized Satin-Yellow Radiation Pulse with Hardware Acceleration */
+        @keyframes radiation-pulse {
+            0% {
+                box-shadow: 0 0 8px rgba(255, 215, 0, 0.15);
+                border-color: rgba(255, 215, 0, 0.4) !important;
+            }
+            50% {
+                box-shadow: 0 0 16px rgba(255, 255, 0, 0.3);
+                border-color: rgba(255, 255, 0, 0.7) !important;
+            }
+            100% {
+                box-shadow: 0 0 8px rgba(255, 215, 0, 0.15);
+                border-color: rgba(255, 215, 0, 0.4) !important;
+            }
         }
-        50% {
-            box-shadow: 0 0 16px rgba(255, 255, 0, 0.3);
-            border-color: rgba(255, 255, 0, 0.7) !important;
+
+        /* Target specific card elements for optimized mobile rendering */
+        .section-card, 
+        .promo-card,
+        .custom-video-matrix > div {
+            animation: radiation-pulse 6s ease-in-out infinite;
+            transition: border-color 0.5s ease, box-shadow 0.5s ease;
+            will-change: box-shadow, border-color;
         }
-        100% {
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.15);
-            border-color: rgba(255, 215, 0, 0.4) !important;
+
+        .cashapp-glow, .paypal-glow {
+            will-change: box-shadow;
         }
-    }
 
-    /* Target ONLY specific card elements instead of checking every single div */
-    .section-card, 
-    .promo-card,
-    .custom-video-matrix > div {
-        animation: radiation-pulse 6s ease-in-out infinite;
-        transition: border-color 0.5s ease, box-shadow 0.5s ease;
-        will-change: box-shadow, border-color; /* Tells browser to use the GPU */
-    }
+        /* Target specific cyan/pink headers to match theme */
+        .cyan-header, .pink-theme-override, [style*="rgb(0, 212, 255)"], [style*="rgb(255, 0, 128)"] {
+            color: #ffaa00 !important;
+            border-color: #ffd700 !important;
+        }
 
-    /* Keeps your payment terminal rendering smooth without constant calculations */
-    .cashapp-glow, .paypal-glow {
-        will-change: box-shadow;
-    }
-    /* Target specific cyan/pink headers to match */
-    .cyan-header, .pink-theme-override, [style*="rgb(0, 212, 255)"], [style*="rgb(255, 0, 128)"] {
-        color: #ffaa00 !important; /* Deep Amber for text readability */
-        border-color: #ffd700 !important;
-    }
+        /* Update Section Dividers to a subtle Gold line */
+        .section-card-header::before {
+            background: #ffaa00 !important;
+        }
 
-    /* Update Section Dividers to a subtle Gold line */
-    .section-card-header::before {
-        background: #ffaa00 !important;
-    }
+        /* Apply smooth animation across dynamic borders */
+        .section-card, 
+        div[style*="border: 1px solid"], 
+        div[style*="border:1px solid"],
+        button[style*="border: 1px solid"] {
+            animation: radiation-pulse 5s ease-in-out infinite !important;
+            transition: all 0.5s ease;
+        }
 
-    /* Apply the smooth animation across all containers */
-    .section-card, 
-    div[style*="border: 1px solid"], 
-    div[style*="border:1px solid"],
-    button[style*="border: 1px solid"] {
-        animation: radiation-pulse 5s ease-in-out infinite !important;
-        transition: all 0.5s ease;
-    }
+        /* Gold Yellow for Primary Masterclass/Top Elements */
+        div[style*="rgb(0, 212, 255)"], div[style*="#00d4ff"], .blue-theme-override {
+            border-color: #ffd700 !important;
+            color: #ffd700 !important;
+        }
 
-    /* 2. Target Section Cards & Containers dynamically to override old borders */
-    .section-card, 
-    div[style*="border: 1px solid"], 
-    div[style*="border:1px solid"],
-    button[style*="border: 1px solid"] {
-        animation: radiation-pulse 4s ease-in-out infinite !important;
-        transition: all 0.5s ease;
-    }
+        /* Neon Electric Yellow for Buttons and Interactive Accents */
+        button, .preview-edits-btn, div[style*="rgb(0, 255, 170)"], div[style*="#00ffaa"] {
+            border-color: #ffff00 !important;
+            color: #ffff00 !important;
+        }
 
-    /* Shade 1: Gold Yellow for Primary Masterclass/Top Elements */
-    div[style*="rgb(0, 212, 255)"], div[style*="#00d4ff"], .blue-theme-override {
-        border-color: #ffd700 !important;
-        color: #ffd700 !important;
-    }
+        /* Deep Amber Warning Yellow for Labels & Distribution Boxes */
+        div[style*="rgb(255, 0, 128)"], div[style*="#ff0080"], .pink-theme-override {
+            border-color: #ffaa00 !important;
+        }
+        
+        h2[style*="color:"], span[style*="color: rgb(255, 0, 128)"] {
+            color: #ffaa00 !important;
+        }
 
-    /* Shade 2: Neon Electric Yellow for Buttons and Interactive Accents */
-    button, .preview-edits-btn, div[style*="rgb(0, 255, 170)"], div[style*="#00ffaa"] {
-        border-color: #ffff00 !important;
-        color: #ffff00 !important;
-    }
-
-    /* Shade 3: Deep Amber Warning Yellow for Labels & Distribution Boxes */
-    div[style*="rgb(255, 0, 128)"], div[style*="#ff0080"], .pink-theme-override {
-        border-color: #ffaa00 !important;
-    }
+        body {
+            background: radial-gradient(circle at 50% 20%, #0d0d05 0%, #000000 80%) !important;
+        }
+    </style>
     
-    /* Force text headers inside the pink box to match the new theme */
-    h2[style*="color:"], span[style*="color: rgb(255, 0, 128)"] {
-        color: #ffaa00 !important;
-    }
-
-    /* Subtle full-page dark radiation background tint */
-    body {
-        background: radial-gradient(circle at 50% 20%, #0d0d05 0%, #000000 80%) !important;
-    }
-</style>
     <style>
         :root {
             --bg-deep: #0a0b0d;
@@ -105,20 +92,17 @@
             --text-main: #ffffff;
             --text-muted: #a0a5b5;
             
-            /* Theme Color Palette */
             --pfp-yellow: #ffea00;
             --pfp-yellow-glow: rgba(255, 234, 0, 0.25);
             --pfp-white: #ffffff;
             --neon-pink: #ff007f;
             --neon-cyan: #00f0ff;
             
-            /* Interactive Brand Colors */
             --brand-discord: #5865F2;
             --brand-instagram: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7);
             --brand-tiktok: #000000;
             --brand-email: #ffea00;
             
-            /* UI 3D Gloss Elements */
             --game-ui-cash-top: #00ff55;
             --game-ui-cash-bot: #005a19;
             --game-ui-pay-top: #00bfff;
@@ -147,7 +131,6 @@
             position: relative;
         }
 
-        /* AMBIENT BACKGROUND MATRIX */
         .ambient-matrix {
             position: fixed;
             top: 0;
@@ -197,7 +180,6 @@
             -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
         }
 
-        /* BENTO CONTAINER GRID SETUP */
         .bento-container {
             max-width: 800px;
             width: 100%;
@@ -207,7 +189,6 @@
             z-index: 2;
         }
 
-        /* MAIN HERO DASHBOARD MODULE */
         .hero-dashboard {
             background: var(--card-glass);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -260,7 +241,6 @@
             margin-bottom: 28px;
         }
 
-        /* STATISTICS METRIC DISPLAY STRIP */
         .metrics-strip {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -294,7 +274,6 @@
             font-weight: 600;
         }
 
-        /* SECTION CARD BASE CONTAINER */
         .section-card {
             background: var(--card-glass);
             border: 1px solid rgba(255, 255, 255, 0.03);
@@ -353,7 +332,6 @@
             gap: 16px;
         }
 
-        /* INTERACTIVE PURCHASE CARDS */
         .promo-block {
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -405,6 +383,12 @@
         }
 
         /* CUSTOM PRODUCTION DESIGN PLUGINS */
+        .design-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
         .design-item {
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -779,7 +763,6 @@
             border-radius: 10px;
         }
 
-        /* MEDIA LAYOUT RESPONSIVENESS */
         @media (max-width: 768px) {
             .modal-container-split { grid-template-columns: 1fr; gap: 30px; }
             .modal-close-trigger { top: -30px; }
@@ -837,7 +820,7 @@
             </div>
             <div class="section-subheader">Learn how to edit like DEITH. Gain expert strategic insights. Learn technical editing foundations or industrial logistics economics directly from Deith.</div>
             <div class="grid-layout">
-                <div class="promo-block" data-title="Advanced Editing Masterclass" data-tag="Academy Class" data-price="$50">
+                <div class="promo-block" data-title="Advanced Editing Masterclass" data-tag="Academy Class" data-price="$25">
                     <div>
                         <div class="promo-block-tag cyan-tag">Private Session Class</div>
                         <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px;">Master the Techniques I Use to prodcues the viral/high quality videos or Images on my account. This Option is a 30-day plan with a private class 5 times a week.</p>
@@ -859,45 +842,45 @@
                 </div>
             </div>
         </div>
+
         <!-- THE PREVIEW TRIGGER BUTTON -->
-<button class="preview-btn" onclick="toggleVideoShowcase()" style="width: 100%; padding: 12px; background: transparent; border: 1px solid #00ffcc; color: #00ffcc; font-weight: bold; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; margin-top: 20px;">PREVIEW THE EDITS</button>
+        <button class="preview-btn" onclick="toggleVideoShowcase()" style="width: 100%; padding: 12px; background: transparent; border: 1px solid #00ffcc; color: #00ffcc; font-weight: bold; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; margin-top: 20px;">PREVIEW THE EDITS</button>
 
-<!-- THE STYLE VIDEO SHOWCASE GRID -->
-<div id="videoShowcasePanel" style="display: none; flex-direction: column; gap: 20px; margin-top: 20px; width: 100%; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; width: 100%;">
-        
-        <!-- Style 1: Monograph / 3D Style -->
-        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; text-align: center;">
-            <h4 style="color: #00ffcc; margin-top: 0; font-size: 0.9rem; letter-spacing: 1px;">MONOGRAPH // 3D STYLE</h4>
-            <div style="position: relative; width: 100%; padding-bottom: 177.77%; height: 0; background: #111; border-radius: 6px; overflow: hidden; margin-top: 8px;">
-                <iframe src="https://www.tiktok.com/@d.e.i.t.h/video/7643944284219051294" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+        <!-- THE STYLE VIDEO SHOWCASE GRID -->
+        <div id="videoShowcasePanel" style="display: none; flex-direction: column; gap: 20px; margin-top: 20px; width: 100%; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; width: 100%;">
+                
+                <!-- Style 1: Monograph / 3D Style -->
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; text-align: center;">
+                    <h4 style="color: #00ffcc; margin-top: 0; font-size: 0.9rem; letter-spacing: 1px;">MONOGRAPH // 3D STYLE</h4>
+                    <div style="position: relative; width: 100%; padding-bottom: 177.77%; height: 0; background: #111; border-radius: 6px; overflow: hidden; margin-top: 8px;">
+                        <iframe src="https://www.tiktok.com/player/v1/7643944284219051294?autoplay=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- Style 2: Phonk / Mixtape Style -->
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; text-align: center;">
+                    <h4 style="color: #ff007f; margin-top: 0; font-size: 0.9rem; letter-spacing: 1px;">PHONK // MIXTAPE PACING</h4>
+                    <div style="position: relative; width: 100%; padding-bottom: 177.77%; height: 0; background: #111; border-radius: 6px; overflow: hidden; margin-top: 8px;">
+                        <iframe src="https://www.tiktok.com/player/v1/7625020990329818398?autoplay=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
             </div>
+            <p style="color: #a0a0a0; font-size: 0.8rem; text-align: center; margin: 5px 0 0 0;">💡 Tap videos to play style pacing demonstrations directly inside your viewport.</p>
         </div>
 
-        <!-- Style 2: Phonk / Mixtape Style -->
-        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; text-align: center;">
-            <h4 style="color: #ff007f; margin-top: 0; font-size: 0.9rem; letter-spacing: 1px;">PHONK // MIXTAPE PACING</h4>
-            <div style="position: relative; width: 100%; padding-bottom: 177.77%; height: 0; background: #111; border-radius: 6px; overflow: hidden; margin-top: 8px;">
-                <iframe src="https://www.tiktok.com/@d.e.i.t.h/video/7625020990329818398" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
-            </div>
-        </div>
-
-    </div>
-    <p style="color: #a0a0a0; font-size: 0.8rem; text-align: center; margin: 5px 0 0 0;">💡 Tap videos to play style pacing demonstrations directly inside your viewport.</p>
-</div>
-
-<!-- TOGGLE CONTROL SCRIPT -->
-<script>
-function toggleVideoShowcase() {
-    var panel = document.getElementById("videoShowcasePanel");
-    if (panel.style.display === "none" || panel.style.display === "") {
-        panel.style.display = "flex";
-    } else {
-        panel.style.display = "none";
-    }
-}
-</script>
+        <!-- TOGGLE CONTROL SCRIPT -->
+        <script>
+        function toggleVideoShowcase() {
+            var panel = document.getElementById("videoShowcasePanel");
+            if (panel.style.display === "none" || panel.style.display === "") {
+                panel.style.display = "flex";
+            } else {
+                panel.style.display = "none";
+            }
+        }
+        </script>
 
         <!-- MODULE 3: SOUND PROMOTION TERMINAL -->
         <div class="section-card promo-card">
@@ -925,100 +908,94 @@ function toggleVideoShowcase() {
         </div>
 
         <!-- MODULE 4: PRODUCTION & DESIGN BOARD -->
-        <div class="section-card">
-            <div class="section-card-header">Custom Video Options</div>
-<!-- === INTERACTIVE VIDEO MATRIX SYSTEM === -->
-<div class="custom-video-matrix" style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+      <div class="section-card">
+    <div class="section-card-header">Custom Video Options</div>
+    <!-- === INTERACTIVE VIDEO MATRIX SYSTEM === -->
+    <div class="custom-video-matrix" style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
 
-    <!-- ITEM 1: MONOGRAPHS EDIT -->
-    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <h3 style="margin: 0 0 8px 0; font-size: 1.2rem; color: #ffffff; letter-spacing: 1px;">MONOGRAPHS EDIT</h3>
-                <button class="design-preview-btn" onclick="toggleRowPreview('monographPreview')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #ffffff; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
-                    👁 DESIGN PREVIEW
-                </button>
+        <!-- ITEM 1: MONOGRAPHS EDIT -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3 style="margin: 0 0 8px 0; font-size: 1.2rem; color: #ffffff; letter-spacing: 1px;">MONOGRAPHS EDIT</h3>
+                    <button class="design-preview-btn" onclick="toggleRowPreview('monographPreview')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #ffffff; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+                        👁 DESIGN PREVIEW
+                    </button>
+                </div>
+                <a href="#checkout" style="text-decoration: none; scroll-behavior: smooth;">
+                    <div class="price-badge" style="cursor: pointer;">$100</div>
+                </a>
             </div>
-           <a href="#checkout" style="text-decoration: none; scroll-behavior: smooth;">
-    <div style="background: #ffd700; color: #000000; font-weight: bold; padding: 6px 16px; border-radius: 6px; font-size: 1.1rem; box-shadow: 0 0 10px rgba(255,215,0,0.3); cursor: pointer;">$100</div>
-</a>
-        <div id="monographPreview" style="display: none; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
-            <div style="position: relative; width: 100%; max-width: 320px; margin: 0 auto; padding-bottom: 177.77%; height: 0; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
-                <iframe src="https://www.tiktok.com/embed/v2/7376781223933545758" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+            <div id="monographPreview" style="display: none; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
+                <div style="position: relative; width: 100%; max-width: 320px; margin: 0 auto; padding-bottom: 177.77%; height: 0; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+                    <iframe src="https://www.tiktok.com/embed/v2/7376781223933545758" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- ITEM 2: PHONK EDITS -->
-    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <h3 style="margin: 0 0 8px 0; font-size: 1.2rem; color: #ffffff; letter-spacing: 1px;">PHONK EDITS</h3>
-                <button class="design-preview-btn" onclick="toggleRowPreview('phonkPreview')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #ffffff; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
-                    👁 DESIGN PREVIEW
-                </button>
+        <!-- ITEM 2: PHONK EDITS -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3 style="margin: 0 0 8px 0; font-size: 1.2rem; color: #ffffff; letter-spacing: 1px;">PHONK EDITS</h3>
+                    <button class="design-preview-btn" onclick="toggleRowPreview('phonkPreview')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #ffffff; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+                        👁 DESIGN PREVIEW
+                    </button>
+                </div>
+                <a href="#checkout" style="text-decoration: none; scroll-behavior: smooth;">
+                    <div class="price-badge" style="cursor: pointer;">$80</div>
+                </a>
             </div>
-           <a href="#checkout" style="text-decoration: none; scroll-behavior: smooth;">
-    <div class="price-badge" style="cursor: pointer;">$80</div>
-</a>
-        <div id="phonkPreview" style="display: none; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
-            <div style="position: relative; width: 100%; max-width: 320px; margin: 0 auto; padding-bottom: 177.77%; height: 0; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
-                <iframe src="https://www.tiktok.com/embed/v2/7361132145829317918" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+            <div id="phonkPreview" style="display: none; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
+                <div style="position: relative; width: 100%; max-width: 320px; margin: 0 auto; padding-bottom: 177.77%; height: 0; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+                    <iframe src="https://www.tiktok.com/embed/v2/7361132145829317918" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- ITEM 3: 3D EDITS -->
-    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <h3 style="margin: 0 0 8px 0; font-size: 1.2rem; color: #ffffff; letter-spacing: 1px;">3D EDITS</h3>
-                <button class="design-preview-btn" onclick="toggleRowPreview('threedPreview')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #ffffff; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
-                    👁 DESIGN PREVIEW
-                </button>
+        <!-- ITEM 3: 3D EDITS -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3 style="margin: 0 0 8px 0; font-size: 1.2rem; color: #ffffff; letter-spacing: 1px;">3D EDITS</h3>
+                    <button class="design-preview-btn" onclick="toggleRowPreview('threedPreview')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #ffffff; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+                        👁 DESIGN PREVIEW
+                    </button>
+                </div>
+                <a href="#checkout" style="text-decoration: none; scroll-behavior: smooth;">
+                    <div class="price-badge" style="cursor: pointer;">$80</div>
+                </a>
             </div>
-           
-        <div id="threedPreview" style="display: none; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
-            <div style="position: relative; width: 100%; max-width: 320px; margin: 0 auto; padding-bottom: 177.77%; height: 0; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
-                <iframe src="https://www.tiktok.com/embed/v2/7363412958117764382" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+            <div id="threedPreview" style="display: none; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
+                <div style="position: relative; width: 100%; max-width: 320px; margin: 0 auto; padding-bottom: 177.77%; height: 0; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+                    <iframe src="https://www.tiktok.com/embed/v2/7363412958117764382" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- ITEM 4: MIXTAPE EDITS -->
-    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <h3 style="margin: 0 0 8px 0; font-size: 1.2rem; color: #ffffff; letter-spacing: 1px;">MIXTAPE EDITS</h3>
-                <button class="design-preview-btn" onclick="toggleRowPreview('mixtapePreview')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #ffffff; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
-                    👁 DESIGN PREVIEW
-                </button>
+        <!-- ITEM 4: MIXTAPE EDITS -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3 style="margin: 0 0 8px 0; font-size: 1.2rem; color: #ffffff; letter-spacing: 1px;">MIXTAPE EDITS</h3>
+                    <button class="design-preview-btn" onclick="toggleRowPreview('mixtapePreview')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #ffffff; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+                        👁 DESIGN PREVIEW
+                    </button>
+                </div>
+                <a href="#checkout" style="text-decoration: none; scroll-behavior: smooth;">
+                    <div class="price-badge" style="cursor: pointer;">$60</div>
+                </a>
             </div>
-          <a href="#checkout" style="text-decoration: none; scroll-behavior: smooth;">
-    <div class="price-badge" style="cursor: pointer;">$60</div>
-</a>
-        <div id="mixtapePreview" style="display: none; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
-            <div style="position: relative; width: 100%; max-width: 320px; margin: 0 auto; padding-bottom: 177.77%; height: 0; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
-                <iframe src="https://www.tiktok.com/embed/v2/7352319487126435115" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+            <div id="mixtapePreview" style="display: none; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
+                <div style="position: relative; width: 100%; max-width: 320px; margin: 0 auto; padding-bottom: 177.77%; height: 0; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+                    <iframe src="https://www.tiktok.com/embed/v2/7352319487126435115" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
-    </div>
 
+    </div>
 </div>
-
-<!-- MASTER MULTI-DRAWER FUNCTIONALITY INTERACTIVE MAP -->
-<script>
-function toggleRowPreview(panelId) {
-    var panel = document.getElementById(panelId);
-    if (panel.style.display === "none" || panel.style.display === "") {
-        panel.style.display = "block";
-    } else {
-        panel.style.display = "none";
-    }
-}
-</script>
-        <!-- MODULE 5: CONTACT PIPELINES -->
-        <div class="section-card">
+<div class="section-card">
             <div class="section-card-header">For Direct Contact</div>
             <div class="grid-layout">
                 <a href="https://discord.com/users/mart5440" target="_blank" class="interactive-node node-discord">
